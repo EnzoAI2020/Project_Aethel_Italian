@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Project Aethel — Resort Zambrone</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;1,6..96,400&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  /* Layout idea: a night-to-sunset descent down the hillside — full-bleed film panels alternate with quiet ink pages; one copper accent, the colour of the Stromboli sunset. */
+  --ink:#0C1A21;        /* Tyrrhenian night */
+  --ink-2:#13262F;      /* raised panels */
+  --sea:#2E6E78;        /* coast teal */
+  --sand:#EDE3D2;       /* limestone text */
+  --mute:#9FB0B3;       /* secondary text */
+  --ember:#D9926A;      /* Stromboli sunset accent */
+  --line:rgba(237,227,210,.16);
+  --display:'Bodoni Moda', 'Didot', 'Times New Roman', serif;
+  --body:'Figtree', 'Helvetica Neue', Arial, sans-serif;
+  color-scheme:dark;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--ink);color:var(--sand);font-family:var(--body);font-size:18px;line-height:1.6;-webkit-font-smoothing:antialiased}
+img,video{display:block;max-width:100%}
+a{color:var(--ember)}
+a:focus-visible,button:focus-visible{outline:2px solid var(--ember);outline-offset:3px}
+h1,h2,h3{font-family:var(--display);font-weight:400;text-wrap:balance;letter-spacing:-.01em}
+.num{font-variant-numeric:tabular-nums lining-nums}
+.wrap{width:min(1240px,100% - 48px);margin-inline:auto}
+.eyebrow{font-size:12px;letter-spacing:.28em;text-transform:uppercase;font-weight:600;color:var(--ember)}
+.lede{font-size:21px;line-height:1.55;color:var(--sand);max-width:62ch}
+.muted{color:var(--mute)}
+.tag{display:inline-flex;align-items:center;gap:8px;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--sand);background:rgba(12,26,33,.62);backdrop-filter:blur(6px);padding:6px 10px;border:1px solid var(--line)}
+.tag i{width:6px;height:6px;border-radius:50%;background:var(--ember);display:block}
+
+/* nav */
+.nav{position:fixed;inset:0 0 auto 0;z-index:20;display:flex;justify-content:space-between;align-items:center;padding:18px 24px;background:linear-gradient(rgba(12,26,33,.75),rgba(12,26,33,0))}
+.brand{font-family:var(--display);font-size:22px;letter-spacing:.24em;text-transform:uppercase;text-decoration:none;color:var(--sand)}
+.nav ul{display:flex;gap:22px;list-style:none}
+.nav ul a{color:var(--sand);text-decoration:none;font-size:13px;letter-spacing:.12em;text-transform:uppercase;opacity:.82}
+.nav ul a:hover{opacity:1;color:var(--ember)}
+.lang{border:1px solid var(--line);padding:6px 10px;font-size:12px;letter-spacing:.14em}
+@media (max-width:900px){.nav ul li.hide-sm{display:none}}
+
+/* film panels */
+.film{position:relative;overflow:hidden;background:#000}
+.film video,.film img.bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.film::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(12,26,33,.78) 0%,rgba(12,26,33,.45) 38%,rgba(12,26,33,0) 70%),linear-gradient(180deg,rgba(12,26,33,.35) 0%,rgba(12,26,33,0) 35%,rgba(12,26,33,.9) 100%);pointer-events:none}
+.film .eyebrow{display:inline-block;align-self:flex-start;background:rgba(12,26,33,.78);backdrop-filter:blur(6px);color:#F4B993;padding:8px 12px;border-left:2px solid var(--ember);font-size:13px}
+.film h1,.film h2{text-shadow:0 2px 28px rgba(0,0,0,.55),0 1px 2px rgba(0,0,0,.35)}
+.film .lede,.film .claim,.film .sub{text-shadow:0 1px 14px rgba(0,0,0,.7)}
+.film .over{position:relative;z-index:2}
+.film .tag{position:absolute;z-index:3;right:24px;bottom:24px}
+
+/* hero */
+.hero{min-height:min(92vh,980px);display:flex;align-items:flex-end}
+.hero .over{padding:0 0 88px}
+.hero h1{font-size:clamp(64px,13vw,196px);line-height:.86;letter-spacing:-.02em}
+.hero h1 em{font-style:italic;color:var(--ember)}
+.hero .sub{display:flex;flex-wrap:wrap;gap:12px 36px;margin-top:22px;font-size:14px;letter-spacing:.2em;text-transform:uppercase}
+.hero .claim{margin-top:28px;max-width:46ch;font-size:20px}
+
+/* sections */
+section.page{padding:120px 0}
+.split{display:grid;grid-template-columns:5fr 7fr;gap:64px;align-items:center}
+.split.rev{grid-template-columns:7fr 5fr}
+.split.rev .txt{order:2}
+@media (max-width:900px){.split,.split.rev{grid-template-columns:1fr;gap:32px}.split.rev .txt{order:0}}
+.txt{display:flex;flex-direction:column;gap:22px}
+.txt h2{font-size:clamp(40px,5vw,68px);line-height:1.02}
+.frame{position:relative;aspect-ratio:16/10;overflow:hidden;background:#000}
+.frame video,.frame img{width:100%;height:100%;object-fit:cover}
+.frame .tag{position:absolute;left:14px;bottom:14px}
+
+/* figures */
+.figs{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:1px;background:var(--line);border:1px solid var(--line)}
+.fig{background:var(--ink);padding:22px 20px;display:flex;flex-direction:column;gap:4px}
+.fig b{font-family:var(--display);font-weight:400;font-size:38px;line-height:1;color:var(--sand)}
+.fig span{font-size:13px;letter-spacing:.06em;color:var(--mute)}
+
+/* coast reel */
+.reel{display:grid;grid-template-columns:2fr 1fr 1fr;gap:10px;margin-top:48px}
+.reel .frame{aspect-ratio:auto;height:340px}
+@media (max-width:900px){.reel{grid-template-columns:1fr}.reel .frame{height:240px}}
+.dist{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:28px;margin-top:48px;border-top:1px solid var(--line);padding-top:28px}
+.dist b{display:block;font-family:var(--display);font-size:36px;font-weight:400;line-height:1.1}
+.dist span{color:var(--mute);font-size:15px}
+
+/* keys */
+.keys{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:56px}
+@media (max-width:1000px){.keys{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:520px){.keys{grid-template-columns:1fr}}
+.key{background:var(--ink-2);display:flex;flex-direction:column}
+.key .frame{aspect-ratio:4/5}
+.key .body{padding:22px 22px 26px;display:flex;flex-direction:column;gap:6px}
+.key .big{font-family:var(--display);font-size:64px;line-height:.9}
+.key .big small{font-size:20px;color:var(--mute);margin-left:6px;font-family:var(--body)}
+.key h3{font-size:24px}
+.key p{font-size:15px;color:var(--mute)}
+.total{margin-top:28px;display:flex;flex-wrap:wrap;gap:12px 28px;align-items:baseline;font-size:15px;color:var(--mute)}
+.total b{font-family:var(--display);font-weight:400;font-size:40px;color:var(--ember)}
+
+/* venues list */
+.venues{list-style:none;border-top:1px solid var(--line)}
+.venues li{display:grid;grid-template-columns:1fr auto;gap:16px;padding:14px 0;border-bottom:1px solid var(--line);align-items:baseline}
+.venues li b{font-family:var(--display);font-weight:400;font-size:28px}
+.venues li span{color:var(--mute);font-size:14px;letter-spacing:.06em}
+
+/* investment */
+.invest{background:var(--ink-2)}
+.invest h2{font-size:clamp(44px,6vw,84px);line-height:1}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);margin-top:48px}
+@media (max-width:900px){.kpis{grid-template-columns:repeat(2,1fr)}}
+.kpi{background:var(--ink-2);padding:26px 22px;display:flex;flex-direction:column;gap:6px}
+.kpi b{font-family:var(--display);font-weight:400;font-size:clamp(30px,3vw,46px);line-height:1;color:var(--sand);white-space:nowrap}
+.kpi .l{font-size:14px;font-weight:600}
+.kpi .s{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--mute)}
+.charts{display:grid;grid-template-columns:7fr 5fr;gap:40px;margin-top:56px}
+@media (max-width:900px){.charts{grid-template-columns:1fr}}
+.card{border:1px solid var(--line);padding:26px}
+.card h3{font-family:var(--body);font-size:13px;letter-spacing:.2em;text-transform:uppercase;font-weight:600;color:var(--mute);margin-bottom:18px}
+.legend{display:flex;gap:18px;font-size:13px;color:var(--mute);margin-bottom:10px}
+.legend i{display:inline-block;width:10px;height:10px;margin-right:6px;vertical-align:0}
+.mix{display:flex;flex-direction:column;gap:14px}
+.mix .row{display:grid;grid-template-columns:1fr auto;gap:4px 12px;font-size:15px}
+.mix .bar{grid-column:1/-1;height:8px;background:rgba(237,227,210,.08)}
+.mix .bar i{display:block;height:100%;background:var(--sea)}
+.mix .row:first-child .bar i{background:var(--ember)}
+.terms{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:28px;margin-top:56px}
+.terms div{border-top:2px solid var(--ember);padding-top:16px}
+.terms b{display:block;font-family:var(--display);font-weight:400;font-size:34px;line-height:1.1}
+.terms span{font-size:15px;color:var(--mute)}
+.note{margin-top:40px;font-size:13px;color:var(--mute);max-width:110ch}
+
+/* brands */
+.brands{display:flex;flex-wrap:wrap;gap:10px 14px;margin-top:36px}
+.brands span{font-family:var(--display);font-size:clamp(22px,2.4vw,32px);padding:8px 18px;border:1px solid var(--line);font-style:italic}
+
+/* status */
+.status{width:100%;border-collapse:collapse;margin-top:40px;font-size:15px}
+.status th{text-align:left;font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--mute);font-weight:600;padding:0 20px 12px 0;border-bottom:1px solid var(--line)}
+.status td{padding:14px 20px 14px 0;border-bottom:1px solid var(--line);vertical-align:top}
+.status td:first-child{font-weight:600;white-space:nowrap}
+.status td:last-child{color:var(--ember)}
+.tablewrap{overflow-x:auto}
+
+/* closing */
+.closing{min-height:88vh;display:flex;align-items:center}
+.closing .over{padding:120px 0}
+.closing h2{font-size:clamp(48px,7vw,104px);line-height:.98;max-width:14ch}
+.cta{display:inline-block;margin-top:34px;padding:16px 26px;background:var(--ember);color:var(--ink);text-decoration:none;font-weight:600;letter-spacing:.08em;text-transform:uppercase;font-size:14px}
+.contact{margin-top:40px;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,max-content));gap:10px 48px;font-size:15px}
+.contact span{display:block;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--mute)}
+footer{padding:36px 0 48px;font-size:12px;color:var(--mute);border-top:1px solid var(--line)}
+
+
+/* film controls */
+.sound{position:absolute;z-index:4;left:24px;bottom:24px;display:inline-flex;align-items:center;gap:10px;background:rgba(12,26,33,.62);backdrop-filter:blur(6px);border:1px solid var(--line);color:var(--sand);font:600 12px/1 var(--body);letter-spacing:.16em;text-transform:uppercase;padding:12px 16px;cursor:pointer;min-height:44px}
+.sound:hover{border-color:var(--ember);color:var(--ember)}
+.sound svg{width:18px;height:18px}
+/* map */
+.mapwrap{margin-top:56px;display:grid;grid-template-columns:8fr 4fr;gap:40px;align-items:start}
+@media (max-width:900px){.mapwrap{grid-template-columns:1fr}}
+.map{background:#0A161C;border:1px solid var(--line)}
+.map svg{width:100%;height:auto;display:block}
+.legendlist{list-style:none;display:flex;flex-direction:column;border-top:1px solid var(--line)}
+.legendlist li{padding:12px 0;border-bottom:1px solid var(--line);display:grid;grid-template-columns:18px 1fr auto;gap:10px;align-items:baseline;font-size:15px}
+.legendlist li b{font-family:var(--display);font-weight:400;font-size:22px}
+.legendlist .dot{width:10px;height:10px;border-radius:50%;background:var(--sand);display:block;transform:translateY(-1px)}
+.legendlist .dot.e{background:var(--ember)}
+.small{font-size:12px;color:var(--mute);margin-top:12px}
+/* masterplan */
+.mp{display:grid;grid-template-columns:8fr 4fr;gap:28px;margin-top:48px;align-items:stretch}
+@media (max-width:900px){.mp{grid-template-columns:1fr}}
+.mp-img{position:relative;overflow:hidden;background:#000}
+.mp-img img{width:100%;height:auto;display:block}
+.hs{position:absolute;transform:translate(-50%,-50%);width:44px;height:44px;border-radius:50%;border:0;background:transparent;cursor:pointer;display:grid;place-items:center}
+.hs span{width:18px;height:18px;border-radius:50%;background:var(--ember);box-shadow:0 0 0 6px rgba(217,146,106,.28);display:grid;place-items:center;font:600 11px/1 var(--body);color:var(--ink);transition:transform .25s}
+.hs:hover span,.hs[aria-pressed="true"] span{transform:scale(1.35);background:var(--sand)}
+@media (prefers-reduced-motion:no-preference){.hs span{animation:pulse 2.6s ease-in-out infinite}}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 6px rgba(217,146,106,.28)}50%{box-shadow:0 0 0 12px rgba(217,146,106,.08)}}
+.mp-panel{background:var(--ink-2);display:flex;flex-direction:column}
+.mp-panel .frame{aspect-ratio:16/10}
+.mp-panel .body{padding:22px 24px 26px;display:flex;flex-direction:column;gap:8px}
+.mp-panel h3{font-size:30px;line-height:1.1}
+.mp-panel .fact{font-family:var(--display);font-size:20px;color:var(--ember)}
+.mp-panel p{font-size:15px;color:var(--mute)}
+.mp-list{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.mp-list button{background:none;border:1px solid var(--line);color:var(--sand);font:500 13px/1 var(--body);padding:10px 12px;cursor:pointer;min-height:40px}
+.mp-list button[aria-pressed="true"]{border-color:var(--ember);color:var(--ember)}
+/* galleries */
+.gal{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:40px}
+.gal.two{grid-template-columns:3fr 2fr}
+.gal.four{grid-template-columns:repeat(2,1fr)}
+.focus{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:48px}
+@media (max-width:900px){.focus,.gal.four{grid-template-columns:1fr}}
+.focus article{background:var(--ink-2);display:flex;flex-direction:column}
+.focus .frame{aspect-ratio:16/10}
+.focus .body{padding:26px 28px 30px;display:flex;flex-direction:column;gap:10px}
+.focus h3{font-size:44px;line-height:1}
+.focus .fact{font-family:var(--display);font-style:italic;font-size:20px;color:var(--ember)}
+.focus p{font-size:16px;color:var(--mute)}
+.chips{display:flex;flex-wrap:wrap;gap:8px 10px;margin-top:8px;list-style:none}
+.chips li{border:1px solid var(--line);padding:8px 14px;font-size:14px}
+@media (max-width:900px){.gal,.gal.two{grid-template-columns:1fr}}
+.gal figure{position:relative;overflow:hidden;background:#000}
+.gal img{width:100%;height:100%;object-fit:cover;aspect-ratio:16/10;transition:transform 1.2s cubic-bezier(.2,.7,.2,1)}
+.gal figure:hover img{transform:scale(1.04)}
+.gal figcaption{position:absolute;left:0;right:0;bottom:0;padding:28px 16px 14px;background:linear-gradient(transparent,rgba(12,26,33,.85));font-size:14px}
+.gal figcaption b{display:block;font-family:var(--display);font-weight:400;font-size:22px}
+
+@media (max-width:520px){.kpi{padding:18px 12px}.kpi b{font-size:22px}.kpi .s{letter-spacing:.06em}}
+/* motion: content is visible at rest; reveal only nudges position */
+.rv{transition:transform .9s cubic-bezier(.2,.7,.2,1)}
+.rv.pre{transform:translateY(24px)}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.rv,.rv.pre{transform:none;transition:none}}
+</style>
+</head>
+<body>
+
+<nav class="nav" aria-label="Sezioni">
+  <a class="brand" href="#top">Aethel</a>
+  <ul>
+    <li class="hide-sm"><a href="#coast">La costa</a></li>
+    <li class="hide-sm"><a href="#resort">Il resort</a></li>
+    <li class="hide-sm"><a href="#investment">Investimento</a></li>
+    <li><a href="#contact">Contatti</a></li>
+    <li><span class="lang">IT</span></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<header class="film hero" id="top">
+  <video id="film" data-src="media/film.mp4" poster="media/film.jpg" muted loop playsinline autoplay preload="auto" aria-label="Animazione AI del rendering di progetto: il resort al tramonto con lo Stromboli all’orizzonte"></video>
+  <div class="over wrap">
+    <p class="eyebrow">Zambrone · Costa degli Dei · Calabria</p>
+    <h1>Project<br><em>Aethel</em></h1>
+    <div class="sub"><span>Resort Zambrone</span><span>Costa degli Dei · Calabria</span><span>114 chiavi</span></div>
+    <p class="claim">Un resort cinque stelle sulle scogliere del Tirreno, di fronte alle Eolie e allo Stromboli. Proposto agli investitori istituzionali con un contratto di Forward Purchase chiavi in mano.</p>
+  </div>
+  <button class="sound" id="sound" type="button" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path id="wave" d="M16.5 8.5a5 5 0 0 1 0 7M19 6a8.5 8.5 0 0 1 0 12" opacity=".35"/></svg><span id="soundlabel">Guarda con audio</span></button>
+  <span class="tag"><i></i>Film: riprese drone della costa + animazioni AI dei rendering · illustrativo</span>
+</header>
+
+<!-- COAST -->
+<section class="page" id="coast">
+  <div class="wrap">
+    <div class="txt rv">
+      <p class="eyebrow">01 — La Costa degli Dei</p>
+      <h2>Dove le scogliere incontrano il Tirreno.</h2>
+      <p class="lede">Zambrone si trova sulla Costa degli Dei, il tratto di costa calabrese tra Pizzo e Capo Vaticano. Scogliere bianche, acqua limpida, Tropea a pochi minuti e, all’orizzonte, le sette isole Eolie.</p>
+    </div>
+    <div class="reel">
+      <div class="frame"><video data-src="media/coast_cliffs.mp4" poster="media/coast_cliffs.jpg" muted loop playsinline preload="none" aria-label="Riprese drone di scogliere e calette della Costa degli Dei"></video><span class="tag"><i style="background:var(--sea)"></i>Riprese drone della Costa degli Dei</span></div>
+      <div class="frame"><video data-src="media/isola.mp4" poster="media/isola.jpg" muted loop playsinline preload="none" aria-label="Riprese drone di Tropea e del santuario di Santa Maria dell’Isola"></video></div>
+      <div class="frame"><video data-src="media/tropea.mp4" poster="media/tropea.jpg" muted loop playsinline preload="none" aria-label="Riprese drone della costa vicino a Tropea"></video></div>
+    </div>
+    <div class="dist">
+      <div><b class="num">12 min</b><span>Trasferimento in elicottero da Lamezia Terme all’eliporto del resort</span></div>
+      <div><b class="num">≈ 50 km</b><span>Aeroporto internazionale di Lamezia Terme, circa 50 minuti in auto</span></div>
+      <div><b class="num">≈ 9 km</b><span>Tropea, la Perla del Tirreno</span></div>
+      <div><b>Stromboli</b><span>e le isole Eolie, visibili dal sito</span></div>
+    </div>
+    <div class="mapwrap">
+      <div class="map rv"><svg id="map" viewBox="0 0 1000 520" role="img" aria-label="Mappa schematica della Costa degli Dei con la rotta in elicottero dall’aeroporto di Lamezia Terme al resort, Tropea, Pizzo, Capo Vaticano e le isole Eolie"></svg></div>
+      <div>
+        <p class="eyebrow">Come arrivare</p>
+        <ul class="legendlist" style="margin-top:16px">
+          <li><i class="dot e"></i><span>Project Aethel · Zambrone</span><b></b></li>
+          <li><i class="dot"></i><span>Aeroporto di Lamezia Terme, in elicottero</span><b class="num">12 min</b></li>
+          <li><i class="dot"></i><span>Tropea</span><b class="num">≈ 9 km</b></li>
+          <li><i class="dot"></i><span>Pizzo · Capo Vaticano</span><b></b></li>
+          <li><i class="dot"></i><span>Stromboli e le Eolie, all’orizzonte</span><b></b></li>
+        </ul>
+        <p class="small">Mappa schematica: posizioni approssimative e linea di costa semplificata.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TERRITORY -->
+<section class="page" id="territory" style="padding-top:0">
+  <div class="wrap">
+    <div class="txt rv">
+      <p class="eyebrow">Il territorio · Tropea e Stromboli</p>
+      <h2>Due simboli all’orizzonte.</h2>
+      <p class="lede">Il resort guarda le due immagini che definiscono questa costa: Tropea, sulla sua rupe a sud-ovest, e il vulcano Stromboli al di là del mare.</p>
+    </div>
+    <div class="focus">
+      <article class="rv">
+        <div class="frame"><video data-src="media/tropea_town.mp4" poster="media/tropea_town.jpg" muted loop playsinline preload="none" aria-label="Riprese drone del centro storico di Tropea sulla rupe a picco sul mare"></video><span class="tag"><i style="background:var(--sea)"></i>Riprese drone della Costa degli Dei</span></div>
+        <div class="body"><h3>Tropea</h3><p class="fact num">≈ 9 km dal resort</p><p>La Perla del Tirreno: un centro storico costruito sul bordo di una rupe di arenaria, le spiagge bianche ai suoi piedi e il santuario di Santa Maria dell’Isola sul suo scoglio. A dicembre e gennaio il Borgo Incantato illumina il centro storico.</p></div>
+      </article>
+      <article class="rv">
+        <div class="frame"><video data-src="media/stromboli_cone.mp4" poster="media/stromboli_cone.jpg" muted loop playsinline preload="none" aria-label="Riprese drone del sole che tramonta dietro il cono dello Stromboli"></video><span class="tag"><i style="background:var(--sea)"></i>Riprese drone della Costa degli Dei</span></div>
+        <div class="body"><h3>Stromboli</h3><p class="fact">Visibile dal sito</p><p>Una delle sette isole Eolie, patrimonio mondiale UNESCO, e un vulcano attivo. Dalle terrazze il sole tramonta dietro il suo cono. In estate le barche per le Eolie partono dal porto di Vibo Marina.</p></div>
+      </article>
+    </div>
+    <div class="split" style="margin-top:96px">
+      <div class="txt rv">
+        <p class="eyebrow">Enogastronomia calabrese</p>
+        <h2>Una cucina che parte dalla terra.</h2>
+        <p class="lede">I ristoranti lavorano con ciò che cresce e si pesca a pochi chilometri: la cipolla rossa di Tropea, il pesce fresco del Tirreno, gli oli locali e i vini di Calabria.</p>
+        <ul class="chips"><li>Cipolla Rossa di Tropea (IGP)</li><li>’Nduja di Spilinga</li><li>Pecorino del Monte Poro</li><li>Pesce spada e pesce del Tirreno</li><li>Peperoncino e bergamotto</li><li>Cirò e i vini di Calabria</li></ul>
+      </div>
+      <div class="gal four" style="margin-top:0;grid-template-columns:1fr">
+        <figure><img src="media/ai_food.jpg" alt="Immagine AI di una tavola di specialità calabresi su una terrazza sul mare"><figcaption><b>La tavola calabrese</b>Immagine generata con AI · illustrativa</figcaption></figure>
+        <figure><img src="media/ai_wine.jpg" alt="Immagine AI di una degustazione di vini in una cantina in pietra"><figcaption><b>Cantina e degustazioni</b>Immagine generata con AI · illustrativa</figcaption></figure>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ARCHITECTURE -->
+<section class="page" id="resort" style="padding-top:0">
+  <div class="wrap split">
+    <div class="txt rv">
+      <p class="eyebrow">02 — Architettura e masterplan</p>
+      <h2>Terrazze curve, un solo gesto continuo.</h2>
+      <p class="lede">Il masterplan dell’arch. Natale De Luca rinuncia ai blocchi ad alta densità per un profilo a due piani che segue il pendio. Fronti chiari, linee orizzontali continue e coperture piantumate lasciano al paesaggio il ruolo di elemento unificante.</p>
+      <div class="figs">
+        <div class="fig"><b class="num">80.000</b><span>mq di terreno vista mare</span></div>
+        <div class="fig"><b class="num">114</b><span>chiavi in totale</span></div>
+        <div class="fig"><b class="num">≈ 680</b><span>mq di terreno per unità</span></div>
+      </div>
+    </div>
+    <div class="frame rv"><video data-src="media/aerial.mp4" poster="media/aerial.jpg" muted loop playsinline preload="none" aria-label="Animazione AI del rendering aereo del resort sul versante"></video><span class="tag"><i></i>Animazione AI del rendering · illustrativa</span></div>
+  </div>
+</section>
+
+<!-- MASTERPLAN -->
+<section class="page" style="padding-top:0" id="masterplan">
+  <div class="wrap">
+    <div class="txt rv">
+      <p class="eyebrow">Masterplan · esplora</p>
+      <h2>Visita il resort dall’alto.</h2>
+      <p class="lede">Seleziona un punto sulla vista aerea per scoprire cosa c’è.</p>
+    </div>
+    <div class="mp">
+      <div class="mp-img"><img src="media/aerial_still.jpg" alt="Rendering aereo del resort con punti di interesse numerati"><div id="hotspots"></div></div>
+      <div class="mp-panel" aria-live="polite">
+        <div class="frame" id="mp-media"></div>
+        <div class="body"><p class="eyebrow" id="mp-n"></p><h3 id="mp-t"></h3><p class="fact num" id="mp-f"></p><p id="mp-d"></p></div>
+      </div>
+    </div>
+    <div class="mp-list" id="mp-list"></div>
+    <p class="small">Posizioni indicative, ricavate dal rendering di progetto.</p>
+  </div>
+</section>
+
+<!-- ARRIVAL -->
+<section class="film" style="min-height:78vh;display:flex;align-items:flex-end">
+  <video data-src="media/entrance.mp4" poster="media/entrance.jpg" muted loop playsinline preload="none" aria-label="Animazione AI del rendering di ingresso, viale ed eliporto"></video>
+  <div class="over wrap" style="padding-bottom:80px">
+    <div class="txt" style="max-width:640px">
+      <p class="eyebrow">03 — Arrivo</p>
+      <h2 style="font-size:clamp(40px,5vw,68px);line-height:1.02">Il soggiorno comincia al cancello.</h2>
+      <p class="lede">Un lungo viale dalla strada costiera porta, oltre i cancelli di sicurezza, al valet parking e a 500 mq di reception e concierge. Tre check-in separati (hotel, eventi, ville) e un eliporto privato rendono ogni arrivo discreto.</p>
+    </div>
+  </div>
+  <span class="tag"><i></i>Animazione AI del rendering · illustrativa</span>
+</section>
+
+<!-- ACCOMMODATION -->
+<section class="page">
+  <div class="wrap">
+    <div class="txt rv">
+      <p class="eyebrow">04 — Ospitalità</p>
+      <h2>Quattro modi di soggiornare, 114 chiavi.</h2>
+      <p class="lede">Ogni unità è pensata per privacy e vista: suite al piano terra con giardino e piscina privata, suite al primo piano con balcone di 35 mq e jacuzzi, penthouse, ville indipendenti con servizio di maggiordomo e un’unica bridal suite.</p>
+    </div>
+    <div class="keys">
+      <article class="key rv">
+        <div class="frame"><video data-src="media/suites.mp4" poster="media/suites.jpg" muted loop playsinline preload="none" aria-label="Animazione AI del rendering delle suite all’ora blu"></video></div>
+        <div class="body"><div class="big num">96</div><h3>Suite da 45 mq</h3><p>48 al piano terra con giardino e piscina privata, 48 al primo piano con balcone e jacuzzi.</p></div>
+      </article>
+      <article class="key rv">
+        <div class="frame"><img src="media/ai_penthouse.jpg" alt="Rendering di progetto dell’interno di una suite"><span class="tag"><i style="background:var(--mute)"></i>Immagine generata con AI · illustrativa</span></div>
+        <div class="body"><div class="big num">5</div><h3>Penthouse Suite da 100 mq</h3><p>Penthouse in stile townhouse con lounge privata.</p></div>
+      </article>
+      <article class="key rv">
+        <div class="frame"><video data-src="media/villa.mp4" poster="media/villa.jpg" muted loop playsinline preload="none" aria-label="Animazione AI del rendering della villa al tramonto"></video></div>
+        <div class="body"><div class="big num">12</div><h3>Ville private da 240 mq</h3><p>Completamente indipendenti, con piscina privata e servizio di maggiordomo.</p></div>
+      </article>
+      <article class="key rv">
+        <div class="frame"><video data-src="media/interior.mp4" poster="media/interior.jpg" muted loop playsinline preload="none" aria-label="Animazione AI del rendering degli interni della bridal suite"></video></div>
+        <div class="body"><div class="big num">1</div><h3>Bridal / Presidential Suite</h3><p>300 mq sopra l’area eventi, con ascensore privato dalle sale. Quando non è riservata a un matrimonio è venduta come Presidential Suite.</p></div>
+      </article>
+    </div>
+    <div class="total"><b class="num">114 chiavi</b><span>96 suite + 5 penthouse + 12 ville + 1 bridal suite · 8.000 mq netti ricettivi</span><span class="tag" style="background:none"><i></i>Immagini: rendering di progetto, illustrativi</span></div>
+  </div>
+</section>
+
+<!-- DINING & EVENTS -->
+<section class="page" style="padding-top:0">
+  <div class="wrap split rev">
+    <div class="txt rv">
+      <p class="eyebrow">05 — Ristorazione ed eventi</p>
+      <h2>Dalla tavola alla terrazza, dal giorno alla sera.</h2>
+      <ul class="venues">
+        <li><b>Ristorante gourmet da stella Michelin</b><span class="num">80 coperti · rooftop</span></li>
+        <li><b>Ristorante principale</b><span class="num">150 coperti · tre livelli</span></li>
+        <li><b>Ristorante con terrazza</b><span class="num">120 coperti · cucina calabrese</span></li>
+        <li><b>Bar dell’hotel</b><span class="num">100 posti</span></li>
+        <li><b>Rooftop cocktail bar</b><span class="num">150 ospiti</span></li>
+        <li><b>Sala banchetti e matrimoni</b><span class="num">250 ospiti</span></li>
+        <li><b>Terrazza aperitivi sulla scogliera</b><span class="num">250 ospiti</span></li>
+      </ul>
+    </div>
+    <div class="frame rv" style="aspect-ratio:4/5"><video data-src="media/promenade.mp4" poster="media/promenade.jpg" muted loop playsinline preload="none" aria-label="Animazione AI del rendering della promenade commerciale al tramonto"></video><span class="tag"><i></i>Animazione AI del rendering · illustrativa</span></div>
+  </div>
+</section>
+
+<section style="padding:0 0 120px">
+  <div class="wrap gal four">
+    <figure><img src="media/ai_dining.jpg" alt="Immagine AI del ristorante gourmet con cucina a vista e vista mare al tramonto"><figcaption><b>Ristorante gourmet</b>Immagine generata con AI · illustrativa</figcaption></figure>
+    <figure><img src="media/ai_rooftop.jpg" alt="Immagine AI del rooftop bar al crepuscolo con lo Stromboli all’orizzonte"><figcaption><b>Rooftop cocktail bar</b>Immagine generata con AI · illustrativa</figcaption></figure>
+    <figure><img src="media/ai_banquet.jpg" alt="Immagine AI della sala banchetti allestita per una cena di nozze, con vetrata sul mare"><figcaption><b>Sala banchetti</b>Immagine generata con AI · illustrativa</figcaption></figure>
+    <figure><img src="media/ai_wedding.jpg" alt="Immagine AI di un aperitivo di nozze sulla terrazza a picco sul mare al tramonto"><figcaption><b>Matrimoni sulla scogliera</b>Immagine generata con AI · illustrativa</figcaption></figure>
+  </div>
+</section>
+
+<!-- WELLNESS -->
+<section class="film" style="min-height:82vh;display:flex;align-items:flex-end">
+  <video data-src="media/pools.mp4" poster="media/pools.jpg" muted loop playsinline preload="none" aria-label="Animazione AI del rendering delle piscine con cascate"></video>
+  <div class="over wrap" style="padding-bottom:72px">
+    <p class="eyebrow">06 — Benessere e sport</p>
+    <h2 style="font-size:clamp(40px,5vw,68px);line-height:1.02;max-width:16ch;margin-top:14px">Acqua, pietra, silenzio.</h2>
+    <div class="figs" style="margin-top:32px;max-width:900px;background:rgba(237,227,210,.16)">
+      <div class="fig" style="background:rgba(12,26,33,.72)"><b class="num">1.500</b><span>mq di SPA e idroterapia</span></div>
+      <div class="fig" style="background:rgba(12,26,33,.72)"><b class="num">2</b><span>complessi di piscine a sfioro</span></div>
+      <div class="fig" style="background:rgba(12,26,33,.72)"><b class="num">4 + 4</b><span>campi da tennis e padel</span></div>
+      <div class="fig" style="background:rgba(12,26,33,.72)"><b class="num">2</b><span>corsie di golf virtuale con lounge</span></div>
+    </div>
+  </div>
+  <span class="tag"><i></i>Animazione AI del rendering · illustrativa</span>
+</section>
+
+<section style="padding:10px 0 0">
+  <div class="wrap gal four">
+    <figure><img src="media/ai_spa_indoor.jpg" alt="Immagine AI della piscina interna di idroterapia aperta sul mare"><figcaption><b>SPA e idroterapia</b>Immagine generata con AI · illustrativa</figcaption></figure>
+    <figure><img src="media/ai_golf.jpg" alt="Immagine AI della lounge di golf virtuale con due postazioni e bar"><figcaption><b>Virtual golf lounge</b>Immagine generata con AI · illustrativa</figcaption></figure>
+    <figure><img src="media/ai_tennis.jpg" alt="Immagine AI dei campi da tennis tra gli ulivi sopra il mare"><figcaption><b>Tennis</b>Immagine generata con AI · illustrativa</figcaption></figure>
+    <figure><img src="media/ai_padel.jpg" alt="Immagine AI dei campi da padel in vetro con il resort alle spalle"><figcaption><b>Padel</b>Immagine generata con AI · illustrativa</figcaption></figure>
+  </div>
+</section>
+
+<!-- INVESTMENT -->
+<section class="page invest" id="investment">
+  <div class="wrap">
+    <div class="txt rv">
+      <p class="eyebrow">07 — L’investimento</p>
+      <h2>Un asset completato, a prezzo fisso.</h2>
+      <p class="lede">L’investitore acquista il resort in anticipo a prezzo fisso, con pagamenti a stati di avanzamento durante la costruzione, e riceve da Coast of the Gods Development S.R.L. l’asset completato, chiavi in mano. Il business plan prevede l’apertura nel 2030 con una stagione operativa di 9 mesi.</p>
+    </div>
+    <div class="kpis">
+      <div class="kpi"><b class="num">€275 mln</b><span class="l">Prezzo del contratto</span><span class="s">Dato del promotore</span></div>
+      <div class="kpi"><b class="num">€19,85 mln</b><span class="l">NOI anno 1 (2030)</span><span class="s">Proiezione del business plan</span></div>
+      <div class="kpi"><b class="num">5,67–6,11%</b><span class="l">Exit cap rate</span><span class="s">Ipotesi del business plan</span></div>
+      <div class="kpi"><b class="num">€325 mln</b><span class="l">Valutazione al completamento</span><span class="s">Intervallo del business plan €325–350 mln</span></div>
+    </div>
+    <div class="charts">
+      <div class="card">
+        <h3>Ricavi e NOI, € mln</h3>
+        <div class="legend"><span><i style="background:var(--sea)"></i>Ricavi lordi</span><span><i style="background:var(--ember)"></i>NOI</span></div>
+        <svg viewBox="0 0 640 300" role="img" aria-label="Grafico a barre di ricavi lordi e NOI dal 2030 al 2034" style="width:100%;height:auto">
+          <g font-family="Figtree, sans-serif" font-size="13" fill="#9FB0B3">
+            <line x1="40" y1="250" x2="630" y2="250" stroke="rgba(237,227,210,.25)"/>
+            <line x1="40" y1="160" x2="630" y2="160" stroke="rgba(237,227,210,.08)"/>
+            <line x1="40" y1="70" x2="630" y2="70" stroke="rgba(237,227,210,.08)"/>
+            <text x="34" y="254" text-anchor="end">0</text>
+            <text x="34" y="164" text-anchor="end">30</text>
+            <text x="34" y="74" text-anchor="end">60</text>
+          </g>
+          <g id="bars"></g>
+        </svg>
+        <p class="muted" style="font-size:13px;margin-top:8px">Proiezioni del business plan, anni 1–5. Il margine NOI sale dal 38% al 40%.</p>
+      </div>
+      <div class="card">
+        <h3>Ricavi anno 1 per reparto</h3>
+        <div class="mix">
+          <div class="row"><span>Camere ultra-lusso (96 chiavi)</span><span class="num">€21,77 mln · 41,7%</span><div class="bar"><i style="width:41.7%"></i></div></div>
+          <div class="row"><span>Ville private (12 chiavi)</span><span class="num">€8,75 mln · 16,7%</span><div class="bar"><i style="width:16.7%"></i></div></div>
+          <div class="row"><span>Food &amp; beverage</span><span class="num">€8,50 mln · 16,3%</span><div class="bar"><i style="width:16.3%"></i></div></div>
+          <div class="row"><span>Matrimoni ed eventi</span><span class="num">€7,62 mln · 14,6%</span><div class="bar"><i style="width:14.6%"></i></div></div>
+          <div class="row"><span>SPA e sports club</span><span class="num">€5,60 mln · 10,7%</span><div class="bar"><i style="width:10.7%"></i></div></div>
+        </div>
+        <p class="muted" style="font-size:13px;margin-top:16px">Totale anno 1: €52,24 mln. Penthouse e bridal suite non sono indicate separatamente nel piano.</p>
+      </div>
+    </div>
+    <div class="terms">
+      <div><b>Turnkey Forward Purchase</b><span>Prezzo fisso di €275 mln con pagamenti a stati di avanzamento; consegna dell’asset completato</span></div>
+      <div><b class="num">2030</b><span>Anno di apertura · 270 giorni operativi</span></div>
+      <div><b class="num">20 anni</b><span>Contratto di gestione offerto: base fee 2%, incentive fee 10%, riserva FF&amp;E 4%</span></div>
+      <div><b>ZES</b><span>Zona Economica Speciale unica (ZES Unica): procedura di autorizzazione unica, con offerta per i servizi tecnici già ricevuta da uno studio esterno</span></div>
+    </div>
+    <p class="note">Dati tratti dal business plan del promotore, non verificati in modo indipendente. Le proiezioni non costituiscono garanzia di risultati futuri. La pagina ha finalità informativa e non costituisce offerta o sollecitazione all’investimento.</p>
+  </div>
+</section>
+
+<!-- OPERATORS -->
+<section class="page">
+  <div class="wrap">
+    <div class="txt rv">
+      <p class="eyebrow">08 — Operatori</p>
+      <h2>I brand che contatteremo.</h2>
+      <p class="lede">Il resort è progettato secondo gli standard dei principali operatori dell’ultra-lusso. Il promotore contatterà i seguenti gruppi per un contratto di gestione di lungo periodo.</p>
+    </div>
+    <div class="brands">
+      <span>Aman Resorts</span><span>Mandarin Oriental</span><span>Six Senses</span><span>Four Seasons</span><span>Rosewood</span><span>Cheval Blanc</span><span>Belmond</span><span>Baccarat Hotels</span><span>One&amp;Only Resorts</span><span>Oetiker Collection</span>
+    </div>
+  </div>
+</section>
+
+<!-- STATUS -->
+<section class="page" style="padding-top:0">
+  <div class="wrap">
+    <div class="txt rv">
+      <p class="eyebrow">09 — Stato di sviluppo</p>
+      <h2>Cosa è definito, cosa è in corso.</h2>
+    </div>
+    <div class="tablewrap">
+      <table class="status">
+        <thead><tr><th>Ambito</th><th>Documentato</th><th>In definizione</th></tr></thead>
+        <tbody>
+          <tr><td>Programma</td><td>114 chiavi; superfici nette per funzione; 80.000 mq di terreno</td><td>Superfici di piscine, eliporto e promenade</td></tr>
+          <tr><td>Autorizzazioni</td><td>Offerta di uno studio di ingegneria esterno per i servizi tecnici dell’autorizzazione unica ZES</td><td>Autorizzazione unica e permessi collegati, autorizzazione eliporto, titolo di proprietà</td></tr>
+          <tr><td>Struttura</td><td>Forward Purchase chiavi in mano a €275 mln con pagamenti a stati di avanzamento</td><td>Contenuto del prezzo, calendario dei pagamenti, garanzie</td></tr>
+          <tr><td>Gestione</td><td>Shortlist di dieci operatori da contattare</td><td>Scelta dell’operatore e contratto di gestione</td></tr>
+          <tr><td>Finanza</td><td>Business plan 2030–2034: ricavi, NOI, exit cap rate</td><td>Perizia di valutazione, studio di mercato</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- CLOSING -->
+<section class="film closing" id="contact">
+  <video data-src="media/sunset_sea.mp4" poster="media/sunset_sea.jpg" muted loop playsinline preload="none" aria-label="Riprese drone del tramonto sul Tirreno"></video>
+  <div class="over wrap">
+    <p class="eyebrow">10 — Incontro riservato</p>
+    <h2>Guarda il tramonto dalla scogliera.</h2>
+    <p class="lede" style="margin-top:22px">Project Aethel è presentato in incontri individuali a investitori istituzionali e partner dell’hospitality. Dopo l’incontro, la documentazione completa è disponibile nella data room.</p>
+    <a class="cta" href="mailto:alanccarter@protonmail.com?subject=Project%20Aethel">Richiedi un incontro</a>
+    <div class="contact">
+      <div><span>Referente</span>Alan Carter · Coast of the Gods Development S.R.L.</div>
+      <div><span>Email</span>alanccarter@protonmail.com</div>
+      <div><span>Telefono</span>+44 7869 744477</div>
+      <div><span>Accesso alla data room</span>lorenzopone2020@gmail.com</div>
+    </div>
+  </div>
+  <span class="tag"><i style="background:var(--sea)"></i>Riprese drone della Costa degli Dei</span>
+</section>
+
+<footer>
+  <div class="wrap">Project Aethel · Coast of the Gods Development S.R.L. · Riservato. Rendering e animazioni AI sono illustrativi e non costituiscono documentazione di progetto.</div>
+</footer>
+
+<script>
+(function(){
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  // Revenue / NOI chart (business plan, years 1–5)
+  var rev=[52.24,55.37,57.86,59.60,61.39], noi=[19.85,21.59,22.86,23.84,24.55], yrs=['2030','2031','2032','2033','2034'];
+  var g=document.getElementById('bars'), ns='http://www.w3.org/2000/svg', base=250, k=3; // 3px per €m
+  yrs.forEach(function(y,i){
+    var x=70+i*114;
+    function rect(x,h,fill){var r=document.createElementNS(ns,'rect');r.setAttribute('x',x);r.setAttribute('y',base-h);r.setAttribute('width',38);r.setAttribute('height',h);r.setAttribute('fill',fill);g.appendChild(r);}
+    function txt(x,y,s,fill,anchor,size){var t=document.createElementNS(ns,'text');t.setAttribute('x',x);t.setAttribute('y',y);t.setAttribute('fill',fill);t.setAttribute('font-size',size||12);t.setAttribute('text-anchor',anchor||'middle');t.setAttribute('font-family','Figtree, sans-serif');t.textContent=s;g.appendChild(t);}
+    rect(x,rev[i]*k,'#2E6E78'); rect(x+42,noi[i]*k,'#D9926A');
+    txt(x+19,base-rev[i]*k-6,rev[i].toFixed(1).replace(".",","),'#EDE3D2');
+    txt(x+61,base-noi[i]*k-6,noi[i].toFixed(1).replace(".",","),'#EDE3D2');
+    txt(x+40,base+20,y,'#9FB0B3','middle',13);
+  });
+
+  var SOUND_ON="Guarda con audio", SOUND_OFF="Disattiva audio", AIRPORT="Aeroporto di Lamezia Terme", HELI="12 min in elicottero", SEA="MAR TIRRENO", HS=[{"x": 40, "y": 56, "t": "Arrivo e reception", "f": "500 mq · tre check-in separati", "d": "Valet parking all’ingresso principale, concierge e boutique nella lobby.", "v": "entrance"}, {"x": 34, "y": 44, "t": "Edificio principale", "f": "Ristorante 150 coperti · bar 100 · rooftop 150", "d": "Ristorante panoramico su tre livelli, bar dell’hotel e, sul tetto, il ristorante gourmet da 80 coperti.", "i": "ai_dining.jpg"}, {"x": 57, "y": 33, "t": "Complesso piscine", "f": "Due complessi di piscine a sfioro", "d": "Piscine con cascate e pool bar, il centro della vita diurna del resort.", "v": "pools"}, {"x": 70, "y": 42, "t": "Terrazze e ristorazione", "f": "Ristorante con terrazza · 120 coperti", "d": "Ristorante all’aperto con cucina propria, specializzato in cucina calabrese e pesce fresco.", "v": "hero"}, {"x": 46, "y": 29, "t": "Suite", "f": "96 suite · 45 mq", "d": "Suite al piano terra con giardino e piscina privata; al primo piano con balcone di 35 mq e jacuzzi.", "v": "suites"}, {"x": 79, "y": 23, "t": "Ville private", "f": "12 ville · 240 mq · piscina privata", "d": "Ville indipendenti con maggiordomo e check-in separato vicino all’eliporto.", "v": "villa"}, {"x": 68, "y": 60, "t": "Terrazza piscina e SPA", "f": "SPA 1.500 mq", "d": "SPA di idroterapia con piscina interna ed esterna, sale trattamenti, juice bar e shop.", "i": "spa_pool.jpg"}, {"x": 74, "y": 82, "t": "Sports club", "f": "4 campi da tennis + 4 da padel", "d": "Più un campo pratica di golf virtuale a due corsie con lounge e bar privato.", "i": "ai_sports.jpg"}];
+
+  // Sound toggle for the opening film
+  var film=document.getElementById('film'), sb=document.getElementById('sound'), sl=document.getElementById('soundlabel'), wave=document.getElementById('wave');
+  sb.addEventListener('click',function(){
+    if(!film.src){ film.src=film.getAttribute('data-src'); }
+    film.muted=!film.muted;
+    if(!film.muted){ try{ film.currentTime=0; }catch(e){} var p=film.play(); if(p&&p.catch){p.catch(function(){});} }
+    sb.setAttribute('aria-pressed', String(!film.muted));
+    sl.textContent = film.muted ? SOUND_ON : SOUND_OFF;
+    wave.setAttribute('opacity', film.muted ? '.35' : '1');
+  });
+
+  // Schematic map of the Costa degli Dei
+  (function(){
+    var svg=document.getElementById('map'); if(!svg) return;
+    var W=1000,H=520, lon0=14.8, lon1=16.4, lat0=38.35, lat1=39.0;
+    function P(lon,lat){ return [ (lon-lon0)/(lon1-lon0)*W, (lat1-lat)/(lat1-lat0)*H ]; }
+    var coast=[[16.20,39.0],[16.21,38.95],[16.18,38.86],[16.157,38.735],[16.125,38.715],[16.03,38.725],[15.99,38.705],[15.92,38.683],[15.898,38.677],[15.83,38.62],[15.90,38.585],[15.93,38.55],[15.90,38.45],[15.86,38.35]];
+    var d='M'+coast.map(function(c){return P(c[0],c[1]).map(function(v){return v.toFixed(1).replace(".",",")}).join(' ')}).join(' L')+' L1000 520 L1000 0 Z';
+    var s='';
+    s+='<path d="'+d+'" fill="#162C35" stroke="rgba(237,227,210,.35)" stroke-width="1.2"/>';
+    var isl=[['Stromboli',15.21,38.79,9],['Panarea',15.07,38.64,4],['Salina',14.85,38.56,7],['Lipari',14.95,38.48,8],['Vulcano',14.96,38.40,6]];
+    isl.forEach(function(i){ var p=P(i[1],i[2]); s+='<circle cx="'+p[0]+'" cy="'+p[1]+'" r="'+i[3]+'" fill="#162C35" stroke="rgba(237,227,210,.35)"/>'; s+='<text x="'+(p[0])+'" y="'+(p[1]-i[3]-8)+'" fill="#9FB0B3" font-size="15" text-anchor="middle" font-family="Figtree, sans-serif">'+i[0]+'</text>'; });
+    var air=P(16.242,38.905), res=P(15.99,38.70);
+    var mid=[(air[0]+res[0])/2-40,(air[1]+res[1])/2-70];
+    s+='<path id="route" d="M'+air[0]+' '+air[1]+' Q'+mid[0]+' '+mid[1]+' '+res[0]+' '+res[1]+'" fill="none" stroke="#D9926A" stroke-width="2" stroke-dasharray="6 6"/>';
+    s+='<circle id="heli" r="5" fill="#EDE3D2" cx="'+air[0]+'" cy="'+air[1]+'"/>';
+    var towns=[['Tropea',15.898,38.677,'end',-10,18],['Pizzo',16.157,38.735,'start',10,4],['Capo Vaticano',15.83,38.62,'end',-10,6],['Vibo Valentia',16.10,38.675,'start',10,16],[AIRPORT,16.242,38.905,"end",-12,-12]];
+    towns.forEach(function(t){ var p=P(t[1],t[2]); s+='<circle cx="'+p[0]+'" cy="'+p[1]+'" r="4" fill="#EDE3D2"/><text x="'+(p[0]+t[4])+'" y="'+(p[1]+t[5])+'" fill="#EDE3D2" font-size="16" text-anchor="'+t[3]+'" font-family="Figtree, sans-serif">'+t[0]+'</text>'; });
+    s+='<circle cx="'+res[0]+'" cy="'+res[1]+'" r="16" fill="rgba(217,146,106,.25)"/><circle cx="'+res[0]+'" cy="'+res[1]+'" r="7" fill="#D9926A"/>';
+    s+='<text x="'+(res[0]+4)+'" y="'+(res[1]+38)+'" fill="#D9926A" font-size="18" font-family="Bodoni Moda, serif" font-style="italic">Aethel · Zambrone</text>';
+    s+='<text x="'+(mid[0]-6)+'" y="'+(mid[1]+20)+'" fill="#D9926A" font-size="15" text-anchor="end" font-family="Figtree, sans-serif">'+HELI+'</text>';
+    var sea=P(15.35,38.55); s+='<text x="'+sea[0]+'" y="'+sea[1]+'" fill="rgba(237,227,210,.28)" font-size="20" letter-spacing="6" font-family="Figtree, sans-serif">'+SEA+'</text>';
+    svg.innerHTML=s;
+    if(!reduce){
+      var route=document.getElementById('route'), heli=document.getElementById('heli'), L=route.getTotalLength(), t0=null;
+      function step(ts){ if(!t0)t0=ts; var k=((ts-t0)%6000)/6000; var pt=route.getPointAtLength(k*L); heli.setAttribute('cx',pt.x); heli.setAttribute('cy',pt.y); requestAnimationFrame(step); }
+      requestAnimationFrame(step);
+    }
+  })();
+
+  // Explorable masterplan
+  (function(){
+    var box=document.getElementById('hotspots'), list=document.getElementById('mp-list'); if(!box) return;
+    var media=document.getElementById('mp-media'), n=document.getElementById('mp-n'), tt=document.getElementById('mp-t'), f=document.getElementById('mp-f'), dd=document.getElementById('mp-d');
+    var btns=[];
+    function show(i){
+      var h=HS[i];
+      btns.forEach(function(b){ b.forEach(function(x){ x.setAttribute('aria-pressed','false'); }); });
+      btns[i].forEach(function(x){ x.setAttribute('aria-pressed','true'); });
+      n.textContent=String(i+1).padStart(2,'0')+' / '+String(HS.length).padStart(2,'0');
+      tt.textContent=h.t; f.textContent=h.f; dd.textContent=h.d;
+      if(h.v){ media.innerHTML='<video src="media/'+h.v+'.mp4" poster="media/'+h.v+'.jpg" muted loop playsinline '+(reduce?'':'autoplay')+'></video>'; }
+      else { media.innerHTML='<img src="media/'+h.i+'" alt="">'; }
+    }
+    HS.forEach(function(h,i){
+      var b=document.createElement('button'); b.className='hs'; b.type='button'; b.style.left=h.x+'%'; b.style.top=h.y+'%'; b.setAttribute('aria-label',h.t); b.setAttribute('aria-pressed','false');
+      b.innerHTML='<span>'+(i+1)+'</span>'; b.addEventListener('click',function(){show(i)}); box.appendChild(b);
+      var c=document.createElement('button'); c.type='button'; c.textContent=(i+1)+' · '+h.t; c.setAttribute('aria-pressed','false'); c.addEventListener('click',function(){show(i)}); list.appendChild(c);
+      btns.push([b,c]);
+    });
+    box.style.position='absolute'; box.style.inset='0';
+    show(0);
+  })();
+
+  // Videos: play only while visible; reduced motion keeps the poster
+  var vids=[].slice.call(document.querySelectorAll('video[data-src]'));
+  function load(v){ if(!v.src){ v.src=v.getAttribute('data-src'); } }
+  if(reduce){ vids.forEach(function(v){ v.removeAttribute('autoplay'); }); }
+  else if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(es){
+      es.forEach(function(e){ var v=e.target;
+        if(e.isIntersecting){ load(v); var p=v.play(); if(p&&p.catch){p.catch(function(){});} }
+        else { v.pause(); }
+      });
+    },{rootMargin:'200px 0px'});
+    vids.forEach(function(v){ io.observe(v); });
+  } else { vids.forEach(function(v){ load(v); v.play(); }); }
+
+  // Gentle reveal: elements are visible at rest, only nudged into place
+  if(!reduce && 'IntersectionObserver' in window){
+    var rvs=[].slice.call(document.querySelectorAll('.rv'));
+    var vh=window.innerHeight;
+    rvs.forEach(function(el){ if(el.getBoundingClientRect().top>vh) el.classList.add('pre'); });
+    var io2=new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.remove('pre'); io2.unobserve(e.target);} }); },{threshold:.12});
+    rvs.forEach(function(el){ io2.observe(el); });
+  }
+})();
+</script>
+</body>
+</html>
