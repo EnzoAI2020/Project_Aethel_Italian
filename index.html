@@ -213,6 +213,22 @@ footer{padding:36px 0 48px;font-size:12px;color:var(--mute);border-top:1px solid
 .gal figcaption b{display:block;font-family:var(--display);font-weight:400;font-size:22px}
 
 @media (max-width:520px){.kpi{padding:18px 12px}.kpi b{font-size:22px}.kpi .s{letter-spacing:.06em}}
+/* grid children must be allowed to shrink: videos carry a wide intrinsic size */
+body{overflow-x:clip}
+.split>*,.focus>*,.mp>*,.reel>*,.keys>*,.gal>*,.charts>*,.mapwrap>*,.vgrid>*,.kpis>*,.figs>*{min-width:0}
+.frame,.film{max-width:100%}
+.frame video,.frame img,.film video{max-width:100%}
+/* architect villas */
+.vgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:48px}
+@media (max-width:900px){.vgrid{grid-template-columns:1fr}}
+.vcard{background:var(--ink-2);display:flex;flex-direction:column}
+.vcard img{width:100%;height:100%;object-fit:cover;display:block}
+.vcard .vbig{aspect-ratio:16/9;overflow:hidden}
+.vcard .vsmall{display:grid;grid-template-columns:1fr 1fr;gap:4px;margin-top:4px}
+.vcard .vsmall img{aspect-ratio:16/9}
+.vcard .body{padding:20px 24px 24px;display:flex;justify-content:space-between;align-items:baseline;gap:16px}
+.vcard h3{font-size:28px}
+.vcard p{font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:var(--ember)}
 /* motion: content is visible at rest; reveal only nudges position */
 .rv{transition:transform .9s cubic-bezier(.2,.7,.2,1)}
 .rv.pre{transform:translateY(24px)}
@@ -431,9 +447,9 @@ html{-webkit-text-size-adjust:100%}
       <h2>Terrazze curve, un solo gesto continuo.</h2>
       <p class="lede">Il masterplan dell’arch. Natale De Luca rinuncia ai blocchi ad alta densità per un profilo a due piani che segue il pendio. Fronti chiari, linee orizzontali continue e coperture piantumate lasciano al paesaggio il ruolo di elemento unificante.</p>
       <div class="figs">
-        <div class="fig"><b class="num">80.000</b><span>mq di terreno vista mare</span></div>
+        <div class="fig"><b class="num">≈ 75.000</b><span>mq di terreno vista mare</span></div>
         <div class="fig"><b class="num">114</b><span>chiavi in totale</span></div>
-        <div class="fig"><b class="num">≈ 680</b><span>mq di terreno per unità</span></div>
+        <div class="fig"><b class="num">≈ 660</b><span>mq di terreno per unità</span></div>
       </div>
     </div>
     <div class="frame rv"><video data-src="media/aerial.mp4" poster="media/aerial.jpg" muted loop playsinline preload="none" aria-label="Animazione AI del rendering aereo del resort sul versante"></video><span class="tag"><i></i>Animazione AI del rendering · illustrativa</span></div>
@@ -563,7 +579,7 @@ html{-webkit-text-size-adjust:100%}
     <div class="txt rv">
       <p class="eyebrow">07 — L’investimento</p>
       <h2>Un asset completato, a prezzo fisso.</h2>
-      <p class="lede">L’investitore acquista il resort in anticipo a prezzo fisso, con pagamenti a stati di avanzamento durante la costruzione, e riceve da Coast of the Gods Development S.R.L. l’asset completato, chiavi in mano. Il business plan prevede l’apertura nel 2030 con una stagione operativa di 9 mesi.</p>
+      <p class="lede">L’investitore acquista il resort in anticipo a prezzo fisso, con pagamenti a stati di avanzamento durante la costruzione, e riceve da Coast of the Gods Development S.R.L. l’asset completato, chiavi in mano. L’apertura è prevista nel 2030, con operatività 365 giorni l’anno.</p>
     </div>
     <div class="kpis">
       <div class="kpi"><b class="num">€275 mln</b><span class="l">Prezzo del contratto</span><span class="s">Dato del promotore</span></div>
@@ -602,7 +618,7 @@ html{-webkit-text-size-adjust:100%}
     </div>
     <div class="terms">
       <div><b>Turnkey Forward Purchase</b><span>Prezzo fisso di €275 mln con pagamenti a stati di avanzamento; consegna dell’asset completato</span></div>
-      <div><b class="num">2030</b><span>Anno di apertura · 270 giorni operativi</span></div>
+      <div><b class="num">2030</b><span>Anno di apertura · 365 giorni operativi</span></div>
       <div><b class="num">20 anni</b><span>Contratto di gestione offerto: base fee 2%, incentive fee 10%, riserva FF&amp;E 4%</span></div>
       <div><b>ZES</b><span>Zona Economica Speciale unica (ZES Unica): procedura di autorizzazione unica, con offerta per i servizi tecnici già ricevuta da uno studio esterno</span></div>
     </div>
@@ -635,11 +651,11 @@ html{-webkit-text-size-adjust:100%}
       <table class="status">
         <thead><tr><th>Ambito</th><th>Documentato</th><th>In definizione</th></tr></thead>
         <tbody>
-          <tr><td>Programma</td><td>114 chiavi; superfici nette per funzione; 80.000 mq di terreno</td><td>Superfici di piscine, eliporto e promenade</td></tr>
-          <tr><td>Autorizzazioni</td><td>Offerta di uno studio di ingegneria esterno per i servizi tecnici dell’autorizzazione unica ZES</td><td>Autorizzazione unica e permessi collegati, autorizzazione eliporto, titolo di proprietà</td></tr>
-          <tr><td>Struttura</td><td>Forward Purchase chiavi in mano a €275 mln con pagamenti a stati di avanzamento</td><td>Contenuto del prezzo, calendario dei pagamenti, garanzie</td></tr>
+          <tr><td>Programma</td><td>114 chiavi; superfici nette per funzione; circa 75.000 mq di terreno; apertura nel 2030; 365 giorni di operatività</td><td>Superfici di piscine, eliporto e promenade</td></tr>
+          <tr><td>Autorizzazioni</td><td>Offerta di uno studio di ingegneria esterno per i servizi tecnici dell’autorizzazione unica ZES</td><td>Autorizzazioni in via di definizione: autorizzazione unica e permessi collegati, eliporto, titolo di proprietà</td></tr>
+          <tr><td>Struttura</td><td>—</td><td>In definizione: prezzo fisso di €275 mln con consegna chiavi in mano; contratto di Forward Purchase con pagamenti a stati di avanzamento (contenuto del prezzo, calendario, garanzie)</td></tr>
           <tr><td>Gestione</td><td>Shortlist di dieci operatori da contattare</td><td>Scelta dell’operatore e contratto di gestione</td></tr>
-          <tr><td>Finanza</td><td>Business plan 2030–2034: ricavi, NOI, exit cap rate</td><td>Perizia di valutazione, studio di mercato</td></tr>
+          <tr><td>Perizia di valutazione</td><td>Valutazione di €325 mln al completamento; business plan 2030–2034 (ricavi, NOI, exit cap rate)</td><td>Studio di mercato</td></tr>
         </tbody>
       </table>
     </div>
@@ -653,12 +669,11 @@ html{-webkit-text-size-adjust:100%}
     <p class="eyebrow">10 — Incontro riservato</p>
     <h2>Guarda il tramonto dalla scogliera.</h2>
     <p class="lede" style="margin-top:22px">Project Aethel è presentato in incontri individuali a investitori istituzionali e partner dell’hospitality. Dopo l’incontro, la documentazione completa è disponibile nella data room.</p>
-    <a class="cta" href="mailto:alanccarter@protonmail.com?subject=Project%20Aethel">Richiedi un incontro</a>
+    <a class="cta" href="mailto:coastofthegods.development@gmail.com?subject=Project%20Aethel">Richiedi un incontro</a>
     <div class="contact">
       <div><span>Referente</span>Alan Carter · Coast of the Gods Development S.R.L.</div>
-      <div><span>Email</span>alanccarter@protonmail.com</div>
-      <div><span>Telefono</span>+44 7869 744477</div>
-      <div><span>Accesso alla data room</span>lorenzopone2020@gmail.com</div>
+      <div><span>Email</span>coastofthegods.development@gmail.com</div>
+      <div><span>Telefono</span>+39 393 264 9362</div>
     </div>
   </div>
   <span class="tag"><i style="background:var(--sea)"></i>Riprese drone della Costa degli Dei</span>
@@ -786,8 +801,7 @@ html{-webkit-text-size-adjust:100%}
     [].forEach.call(document.querySelectorAll('.status tbody tr'),function(tr){
       [].forEach.call(tr.children,function(td,i){ if(i>0&&heads[i]) td.setAttribute('data-label',heads[i]); });
     });
-  })();
-})();
+  })();})();
 </script>
 </body>
 </html>
