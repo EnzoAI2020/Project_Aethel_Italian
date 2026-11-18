@@ -228,6 +228,7 @@ body{overflow-x:clip}
 .vcard .vsmall img{aspect-ratio:16/9}
 .vcard .body{padding:20px 24px 24px;display:flex;justify-content:space-between;align-items:baseline;gap:16px}
 .vcard h3{font-size:28px}
+@media (max-width:640px){.vcard .body{flex-direction:column;gap:6px;padding:18px 18px 22px}.vcard h3{font-size:24px}}
 .vcard p{font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:var(--ember)}
 /* motion: content is visible at rest; reveal only nudges position */
 .rv{transition:transform .9s cubic-bezier(.2,.7,.2,1)}
@@ -367,7 +368,7 @@ html{-webkit-text-size-adjust:100%}
     <p class="claim">Un resort cinque stelle sulle scogliere del Tirreno, di fronte alle Eolie e allo Stromboli. Proposto agli investitori istituzionali con un contratto di Forward Purchase chiavi in mano.</p>
   </div>
   <button class="sound" id="sound" type="button" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path id="wave" d="M16.5 8.5a5 5 0 0 1 0 7M19 6a8.5 8.5 0 0 1 0 12" opacity=".35"/></svg><span id="soundlabel">Guarda con audio</span></button>
-  <span class="tag"><i></i>Film: riprese drone della costa + animazioni AI dei rendering · illustrativo</span>
+  
 </header>
 
 <!-- COAST -->
@@ -379,7 +380,7 @@ html{-webkit-text-size-adjust:100%}
       <p class="lede">Zambrone si trova sulla Costa degli Dei, il tratto di costa calabrese tra Pizzo e Capo Vaticano. Scogliere bianche, acqua limpida, Tropea a pochi minuti e, all’orizzonte, le sette isole Eolie.</p>
     </div>
     <div class="reel">
-      <div class="frame"><video data-src="media/coast_cliffs.mp4" poster="media/coast_cliffs.jpg" muted loop playsinline preload="none" aria-label="Riprese drone di scogliere e calette della Costa degli Dei"></video><span class="tag"><i style="background:var(--sea)"></i>Riprese drone della Costa degli Dei</span></div>
+      <div class="frame"><video data-src="media/coast_cliffs.mp4" poster="media/coast_cliffs.jpg" muted loop playsinline preload="none" aria-label="Riprese drone di scogliere e calette della Costa degli Dei"></video></div>
       <div class="frame"><video data-src="media/isola.mp4" poster="media/isola.jpg" muted loop playsinline preload="none" aria-label="Riprese drone di Tropea e del santuario di Santa Maria dell’Isola"></video></div>
       <div class="frame"><video data-src="media/tropea.mp4" poster="media/tropea.jpg" muted loop playsinline preload="none" aria-label="Riprese drone della costa vicino a Tropea"></video></div>
     </div>
@@ -416,11 +417,11 @@ html{-webkit-text-size-adjust:100%}
     </div>
     <div class="focus">
       <article class="rv">
-        <div class="frame"><video data-src="media/tropea_town.mp4" poster="media/tropea_town.jpg" muted loop playsinline preload="none" aria-label="Riprese drone del centro storico di Tropea sulla rupe a picco sul mare"></video><span class="tag"><i style="background:var(--sea)"></i>Riprese drone della Costa degli Dei</span></div>
+        <div class="frame"><video data-src="media/tropea_town.mp4" poster="media/tropea_town.jpg" muted loop playsinline preload="none" aria-label="Riprese drone del centro storico di Tropea sulla rupe a picco sul mare"></video></div>
         <div class="body"><h3>Tropea</h3><p class="fact num">≈ 9 km dal resort</p><p>La Perla del Tirreno: un centro storico costruito sul bordo di una rupe di arenaria, le spiagge bianche ai suoi piedi e il santuario di Santa Maria dell’Isola sul suo scoglio. A dicembre e gennaio il Borgo Incantato illumina il centro storico.</p></div>
       </article>
       <article class="rv">
-        <div class="frame"><video data-src="media/stromboli_cone.mp4" poster="media/stromboli_cone.jpg" muted loop playsinline preload="none" aria-label="Riprese drone del sole che tramonta dietro il cono dello Stromboli"></video><span class="tag"><i style="background:var(--sea)"></i>Riprese drone della Costa degli Dei</span></div>
+        <div class="frame"><video data-src="media/stromboli_cone.mp4" poster="media/stromboli_cone.jpg" muted loop playsinline preload="none" aria-label="Riprese drone del sole che tramonta dietro il cono dello Stromboli"></video></div>
         <div class="body"><h3>Stromboli</h3><p class="fact">Visibile dal sito</p><p>Una delle sette isole Eolie, patrimonio mondiale UNESCO, e un vulcano attivo. Dalle terrazze il sole tramonta dietro il suo cono. In estate le barche per le Eolie partono dal porto di Vibo Marina.</p></div>
       </article>
     </div>
@@ -432,8 +433,8 @@ html{-webkit-text-size-adjust:100%}
         <ul class="chips"><li>Cipolla Rossa di Tropea (IGP)</li><li>’Nduja di Spilinga</li><li>Pecorino del Monte Poro</li><li>Pesce spada e pesce del Tirreno</li><li>Peperoncino e bergamotto</li><li>Cirò e i vini di Calabria</li></ul>
       </div>
       <div class="gal four" style="margin-top:0;grid-template-columns:1fr">
-        <figure><img src="media/ai_food.jpg" alt="Immagine AI di una tavola di specialità calabresi su una terrazza sul mare"><figcaption><b>La tavola calabrese</b>Immagine generata con AI · illustrativa</figcaption></figure>
-        <figure><img src="media/ai_wine.jpg" alt="Immagine AI di una degustazione di vini in una cantina in pietra"><figcaption><b>Cantina e degustazioni</b>Immagine generata con AI · illustrativa</figcaption></figure>
+        <figure><img src="media/ai_food.jpg" alt="Immagine AI di una tavola di specialità calabresi su una terrazza sul mare"><figcaption><b>La tavola calabrese</b></figcaption></figure>
+        <figure><img src="media/ai_wine.jpg" alt="Immagine AI di una degustazione di vini in una cantina in pietra"><figcaption><b>Cantina e degustazioni</b></figcaption></figure>
       </div>
     </div>
   </div>
@@ -452,7 +453,7 @@ html{-webkit-text-size-adjust:100%}
         <div class="fig"><b class="num">≈ 660</b><span>mq di terreno per unità</span></div>
       </div>
     </div>
-    <div class="frame rv"><video data-src="media/aerial.mp4" poster="media/aerial.jpg" muted loop playsinline preload="none" aria-label="Animazione AI del rendering aereo del resort sul versante"></video><span class="tag"><i></i>Animazione AI del rendering · illustrativa</span></div>
+    <div class="frame rv"><video data-src="media/aerial.mp4" poster="media/aerial.jpg" muted loop playsinline preload="none" aria-label="Animazione AI del rendering aereo del resort sul versante"></video></div>
   </div>
 </section>
 
@@ -486,7 +487,7 @@ html{-webkit-text-size-adjust:100%}
       <p class="lede">Un lungo viale dalla strada costiera porta, oltre i cancelli di sicurezza, al valet parking e a 500 mq di reception e concierge. Tre check-in separati (hotel, eventi, ville) e un eliporto privato rendono ogni arrivo discreto.</p>
     </div>
   </div>
-  <span class="tag"><i></i>Animazione AI del rendering · illustrativa</span>
+  
 </section>
 
 <!-- ACCOMMODATION -->
@@ -503,7 +504,7 @@ html{-webkit-text-size-adjust:100%}
         <div class="body"><div class="big num">96</div><h3>Suite da 45 mq</h3><p>48 al piano terra con giardino e piscina privata, 48 al primo piano con balcone e jacuzzi.</p></div>
       </article>
       <article class="key rv">
-        <div class="frame"><img src="media/ai_penthouse.jpg" alt="Rendering di progetto dell’interno di una suite"><span class="tag"><i style="background:var(--mute)"></i>Immagine generata con AI · illustrativa</span></div>
+        <div class="frame"><img src="media/ai_penthouse.jpg" alt="Rendering di progetto dell’interno di una suite"></div>
         <div class="body"><div class="big num">5</div><h3>Penthouse Suite da 100 mq</h3><p>Penthouse in stile townhouse con lounge privata.</p></div>
       </article>
       <article class="key rv">
@@ -515,7 +516,7 @@ html{-webkit-text-size-adjust:100%}
         <div class="body"><div class="big num">1</div><h3>Bridal / Presidential Suite</h3><p>300 mq sopra l’area eventi, con ascensore privato dalle sale. Quando non è riservata a un matrimonio è venduta come Presidential Suite.</p></div>
       </article>
     </div>
-    <div class="total"><b class="num">114 chiavi</b><span>96 suite + 5 penthouse + 12 ville + 1 bridal suite · 8.000 mq netti ricettivi</span><span class="tag" style="background:none"><i></i>Immagini: rendering di progetto, illustrativi</span></div>
+    <div class="total"><b class="num">114 chiavi</b><span>96 suite + 5 penthouse + 12 ville + 1 bridal suite · 8.000 mq netti ricettivi</span></div>
   </div>
 </section>
 
@@ -535,16 +536,16 @@ html{-webkit-text-size-adjust:100%}
         <li><b>Terrazza aperitivi sulla scogliera</b><span class="num">250 ospiti</span></li>
       </ul>
     </div>
-    <div class="frame rv" style="aspect-ratio:4/5"><video data-src="media/promenade.mp4" poster="media/promenade.jpg" muted loop playsinline preload="none" aria-label="Animazione AI del rendering della promenade commerciale al tramonto"></video><span class="tag"><i></i>Animazione AI del rendering · illustrativa</span></div>
+    <div class="frame rv" style="aspect-ratio:4/5"><video data-src="media/promenade.mp4" poster="media/promenade.jpg" muted loop playsinline preload="none" aria-label="Animazione AI del rendering della promenade commerciale al tramonto"></video></div>
   </div>
 </section>
 
 <section style="padding:0 0 120px">
   <div class="wrap gal four">
-    <figure><img src="media/ai_dining.jpg" alt="Immagine AI del ristorante gourmet con cucina a vista e vista mare al tramonto"><figcaption><b>Ristorante gourmet</b>Immagine generata con AI · illustrativa</figcaption></figure>
-    <figure><img src="media/ai_rooftop.jpg" alt="Immagine AI del rooftop bar al crepuscolo con lo Stromboli all’orizzonte"><figcaption><b>Rooftop cocktail bar</b>Immagine generata con AI · illustrativa</figcaption></figure>
-    <figure><img src="media/ai_banquet.jpg" alt="Immagine AI della sala banchetti allestita per una cena di nozze, con vetrata sul mare"><figcaption><b>Sala banchetti</b>Immagine generata con AI · illustrativa</figcaption></figure>
-    <figure><img src="media/ai_wedding.jpg" alt="Immagine AI di un aperitivo di nozze sulla terrazza a picco sul mare al tramonto"><figcaption><b>Matrimoni sulla scogliera</b>Immagine generata con AI · illustrativa</figcaption></figure>
+    <figure><img src="media/ai_dining.jpg" alt="Immagine AI del ristorante gourmet con cucina a vista e vista mare al tramonto"><figcaption><b>Ristorante gourmet</b></figcaption></figure>
+    <figure><img src="media/ai_rooftop.jpg" alt="Immagine AI del rooftop bar al crepuscolo con lo Stromboli all’orizzonte"><figcaption><b>Rooftop cocktail bar</b></figcaption></figure>
+    <figure><img src="media/ai_banquet.jpg" alt="Immagine AI della sala banchetti allestita per una cena di nozze, con vetrata sul mare"><figcaption><b>Sala banchetti</b></figcaption></figure>
+    <figure><img src="media/ai_wedding.jpg" alt="Immagine AI di un aperitivo di nozze sulla terrazza a picco sul mare al tramonto"><figcaption><b>Matrimoni sulla scogliera</b></figcaption></figure>
   </div>
 </section>
 
@@ -561,15 +562,15 @@ html{-webkit-text-size-adjust:100%}
       <div class="fig" style="background:rgba(12,26,33,.72)"><b class="num">2</b><span>corsie di golf virtuale con lounge</span></div>
     </div>
   </div>
-  <span class="tag"><i></i>Animazione AI del rendering · illustrativa</span>
+  
 </section>
 
 <section style="padding:10px 0 0">
   <div class="wrap gal four">
-    <figure><img src="media/ai_spa_indoor.jpg" alt="Immagine AI della piscina interna di idroterapia aperta sul mare"><figcaption><b>SPA e idroterapia</b>Immagine generata con AI · illustrativa</figcaption></figure>
-    <figure><img src="media/ai_golf.jpg" alt="Immagine AI della lounge di golf virtuale con due postazioni e bar"><figcaption><b>Virtual golf lounge</b>Immagine generata con AI · illustrativa</figcaption></figure>
-    <figure><img src="media/ai_tennis.jpg" alt="Immagine AI dei campi da tennis tra gli ulivi sopra il mare"><figcaption><b>Tennis</b>Immagine generata con AI · illustrativa</figcaption></figure>
-    <figure><img src="media/ai_padel.jpg" alt="Immagine AI dei campi da padel in vetro con il resort alle spalle"><figcaption><b>Padel</b>Immagine generata con AI · illustrativa</figcaption></figure>
+    <figure><img src="media/ai_spa_indoor.jpg" alt="Immagine AI della piscina interna di idroterapia aperta sul mare"><figcaption><b>SPA e idroterapia</b></figcaption></figure>
+    <figure><img src="media/ai_golf.jpg" alt="Immagine AI della lounge di golf virtuale con due postazioni e bar"><figcaption><b>Virtual golf lounge</b></figcaption></figure>
+    <figure><img src="media/ai_tennis.jpg" alt="Immagine AI dei campi da tennis tra gli ulivi sopra il mare"><figcaption><b>Tennis</b></figcaption></figure>
+    <figure><img src="media/ai_padel.jpg" alt="Immagine AI dei campi da padel in vetro con il resort alle spalle"><figcaption><b>Padel</b></figcaption></figure>
   </div>
 </section>
 
@@ -662,6 +663,18 @@ html{-webkit-text-size-adjust:100%}
   </div>
 </section>
 
+<!-- VILLAS -->
+<section class="page" id="villas" style="padding-top:0">
+  <div class="wrap">
+    <div class="txt rv">
+      <p class="eyebrow">L’architetto · Studio Natale De Luca</p>
+      <h2>Ville progettate lungo la Costa degli Dei.</h2>
+      <p class="lede">Una selezione di progetti di ville dello Studio Architetto Natale De Luca, l’architetto di Project Aethel, a Zambrone e nei comuni vicini.</p>
+    </div>
+    <div class="vgrid"><article class="vcard rv"><div class="vbig"><img src="media/villa_borgo_1.jpg" alt="Rendering di Borgo degli Dei Villas dello Studio Architetto Natale De Luca"></div><div class="vsmall"><img src="media/villa_borgo_2.jpg" alt="Rendering di Borgo degli Dei Villas dello Studio Architetto Natale De Luca"><img src="media/villa_borgo_3.jpg" alt="Rendering di Borgo degli Dei Villas dello Studio Architetto Natale De Luca"></div><div class="body"><h3>Borgo degli Dei Villas</h3><p>Zambrone</p></div></article><article class="vcard rv"><div class="vbig"><img src="media/villa_ivonne_1.jpg" alt="Rendering di Villa Ivonne dello Studio Architetto Natale De Luca"></div><div class="vsmall"><img src="media/villa_ivonne_2.jpg" alt="Rendering di Villa Ivonne dello Studio Architetto Natale De Luca"><img src="media/villa_ivonne_3.jpg" alt="Rendering di Villa Ivonne dello Studio Architetto Natale De Luca"></div><div class="body"><h3>Villa Ivonne</h3><p>Zambrone</p></div></article><article class="vcard rv"><div class="vbig"><img src="media/villa_zeus_1.jpg" alt="Rendering di Villa Zeus dello Studio Architetto Natale De Luca"></div><div class="vsmall"><img src="media/villa_zeus_2.jpg" alt="Rendering di Villa Zeus dello Studio Architetto Natale De Luca"><img src="media/villa_zeus_3.jpg" alt="Rendering di Villa Zeus dello Studio Architetto Natale De Luca"></div><div class="body"><h3>Villa Zeus</h3><p>Drapia</p></div></article><article class="vcard rv"><div class="vbig"><img src="media/villa_ng_1.jpg" alt="Rendering di Villa NG dello Studio Architetto Natale De Luca"></div><div class="vsmall"><img src="media/villa_ng_2.jpg" alt="Rendering di Villa NG dello Studio Architetto Natale De Luca"><img src="media/villa_ng_3.jpg" alt="Rendering di Villa NG dello Studio Architetto Natale De Luca"></div><div class="body"><h3>Villa NG</h3><p>Parghelia</p></div></article><article class="vcard rv"><div class="vbig"><img src="media/villa_ercole_1.jpg" alt="Rendering di Villa Porto Ercole dello Studio Architetto Natale De Luca"></div><div class="vsmall"><img src="media/villa_ercole_2.jpg" alt="Rendering di Villa Porto Ercole dello Studio Architetto Natale De Luca"><img src="media/villa_ercole_3.jpg" alt="Rendering di Villa Porto Ercole dello Studio Architetto Natale De Luca"></div><div class="body"><h3>Villa Porto Ercole</h3><p>Ricadi</p></div></article><article class="vcard rv"><div class="vbig"><img src="media/villa_puente_1.jpg" alt="Rendering di Puente Romano dello Studio Architetto Natale De Luca"></div><div class="vsmall"><img src="media/villa_puente_2.jpg" alt="Rendering di Puente Romano dello Studio Architetto Natale De Luca"><img src="media/villa_puente_3.jpg" alt="Rendering di Puente Romano dello Studio Architetto Natale De Luca"></div><div class="body"><h3>Puente Romano</h3><p>Tropea</p></div></article><article class="vcard rv"><div class="vbig"><img src="media/villa_dolce_1.jpg" alt="Rendering di Borgo Dolce Vita dello Studio Architetto Natale De Luca"></div><div class="vsmall"><img src="media/villa_dolce_2.jpg" alt="Rendering di Borgo Dolce Vita dello Studio Architetto Natale De Luca"><img src="media/villa_dolce_3.jpg" alt="Rendering di Borgo Dolce Vita dello Studio Architetto Natale De Luca"></div><div class="body"><h3>Borgo Dolce Vita</h3><p>Costa degli Dei</p></div></article></div>
+    <p class="small" style="margin-top:36px">Rendering dello Studio Architetto Natale De Luca. Sono progetti distinti dello studio, mostrati come portfolio; non fanno parte del resort Project Aethel.</p>
+  </div>
+</section>
 <!-- CLOSING -->
 <section class="film closing" id="contact">
   <video data-src="media/sunset_sea.mp4" poster="media/sunset_sea.jpg" muted loop playsinline preload="none" aria-label="Riprese drone del tramonto sul Tirreno"></video>
@@ -676,7 +689,7 @@ html{-webkit-text-size-adjust:100%}
       <div><span>Telefono</span>+39 393 264 9362</div>
     </div>
   </div>
-  <span class="tag"><i style="background:var(--sea)"></i>Riprese drone della Costa degli Dei</span>
+  
 </section>
 
 <footer>
