@@ -722,7 +722,7 @@ html{-webkit-text-size-adjust:100%}
     var s='';
     s+='<path d="'+d+'" fill="#162C35" stroke="rgba(237,227,210,.35)" stroke-width="1.2"/>';
     var isl=[['Stromboli',15.21,38.79,9],['Panarea',15.07,38.64,4],['Salina',14.85,38.56,7],['Lipari',14.95,38.48,8],['Vulcano',14.96,38.40,6]];
-    isl.forEach(function(i){ var p=P(i[1],i[2]); s+='<circle cx="'+p[0]+'" cy="'+p[1]+'" r="'+i[3]+'" fill="#162C35" stroke="rgba(237,227,210,.35)"/>'; s+='<text x="'+(p[0])+'" y="'+(p[1]-i[3]-8)+'" fill="#9FB0B3" font-size="15" text-anchor="middle" font-family="Figtree, sans-serif">'+i[0]+'</text>'; });
+    isl.forEach(function(i){ var p=P(i[1],i[2]); s+='<circle cx="'+p[0]+'" cy="'+p[1]+'" r="'+i[3]+'" fill="#162C35" stroke="rgba(237,227,210,.35)"/>'; s+='<text x="'+(i[0]==='Salina'?p[0]-i[3]:p[0])+'" y="'+(p[1]-i[3]-8)+'" fill="#9FB0B3" font-size="15" text-anchor="'+(i[0]==='Salina'?'start':'middle')+'" font-family="Figtree, sans-serif">'+i[0]+'</text>'; });
     var air=P(16.242,38.905), res=P(15.99,38.70);
     var mid=[(air[0]+res[0])/2-40,(air[1]+res[1])/2-70];
     s+='<path id="route" d="M'+air[0]+' '+air[1]+' Q'+mid[0]+' '+mid[1]+' '+res[0]+' '+res[1]+'" fill="none" stroke="#D9926A" stroke-width="2" stroke-dasharray="6 6"/>';
@@ -730,7 +730,7 @@ html{-webkit-text-size-adjust:100%}
     var towns=[['Tropea',15.898,38.677,'end',-10,18],['Pizzo',16.157,38.735,'start',10,4],['Capo Vaticano',15.83,38.62,'end',-10,6],['Vibo Valentia',16.10,38.675,'start',10,16],[AIRPORT,16.242,38.905,"end",-12,-12]];
     towns.forEach(function(t){ var p=P(t[1],t[2]); s+='<circle cx="'+p[0]+'" cy="'+p[1]+'" r="4" fill="#EDE3D2"/><text x="'+(p[0]+t[4])+'" y="'+(p[1]+t[5])+'" fill="#EDE3D2" font-size="16" text-anchor="'+t[3]+'" font-family="Figtree, sans-serif">'+t[0]+'</text>'; });
     s+='<circle cx="'+res[0]+'" cy="'+res[1]+'" r="16" fill="rgba(217,146,106,.25)"/><circle cx="'+res[0]+'" cy="'+res[1]+'" r="7" fill="#D9926A"/>';
-    s+='<text x="'+(res[0]+4)+'" y="'+(res[1]+38)+'" fill="#D9926A" font-size="18" font-family="Bodoni Moda, serif" font-style="italic">Aethel · Zambrone</text>';
+    s+='<text x="'+(res[0]+8)+'" y="'+(res[1]+68)+'" fill="#D9926A" font-size="18" font-family="Bodoni Moda, serif" font-style="italic">Aethel · Zambrone</text>';
     s+='<text x="'+(mid[0]-6)+'" y="'+(mid[1]+20)+'" fill="#D9926A" font-size="15" text-anchor="end" font-family="Figtree, sans-serif">'+HELI+'</text>';
     var sea=P(15.35,38.55); s+='<text x="'+sea[0]+'" y="'+sea[1]+'" fill="rgba(237,227,210,.28)" font-size="20" letter-spacing="6" font-family="Figtree, sans-serif">'+SEA+'</text>';
     svg.innerHTML=s;
