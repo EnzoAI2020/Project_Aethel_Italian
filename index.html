@@ -342,6 +342,8 @@ html{-webkit-text-size-adjust:100%}
   .contact div{overflow-wrap:anywhere}
   footer{padding:28px 0 36px}
 }
+.hero h1+.claim{margin-top:30px}
+@media (max-width:640px){.hero h1+.claim{margin-top:24px}}
 </style>
 </head>
 <body>
@@ -362,9 +364,7 @@ html{-webkit-text-size-adjust:100%}
 <header class="film hero" id="top">
   <video id="film" data-src="media/film.mp4" poster="media/film.jpg" muted loop playsinline autoplay preload="auto" aria-label="Animazione AI del rendering di progetto: il resort al tramonto con lo Stromboli all’orizzonte"></video>
   <div class="over wrap">
-    <p class="eyebrow">Zambrone · Costa degli Dei · Calabria</p>
     <h1>Project<br><em>Aethel</em></h1>
-    <div class="sub"><span>Resort Zambrone</span><span>Costa degli Dei · Calabria</span><span>114 chiavi</span></div>
     <p class="claim">Un resort cinque stelle sulle scogliere del Tirreno, di fronte alle Eolie e allo Stromboli. Proposto agli investitori istituzionali con un contratto di Forward Purchase chiavi in mano.</p>
   </div>
   <button class="sound" id="sound" type="button" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path id="wave" d="M16.5 8.5a5 5 0 0 1 0 7M19 6a8.5 8.5 0 0 1 0 12" opacity=".35"/></svg><span id="soundlabel">Guarda con audio</span></button>
@@ -663,18 +663,6 @@ html{-webkit-text-size-adjust:100%}
   </div>
 </section>
 
-<!-- VILLAS -->
-<section class="page" id="villas" style="padding-top:0">
-  <div class="wrap">
-    <div class="txt rv">
-      <p class="eyebrow">L’architetto · Studio Natale De Luca</p>
-      <h2>Ville progettate lungo la Costa degli Dei.</h2>
-      <p class="lede">Una selezione di progetti di ville dello Studio Architetto Natale De Luca, l’architetto di Project Aethel, a Zambrone e nei comuni vicini.</p>
-    </div>
-    <div class="vgrid"><article class="vcard rv"><div class="vbig"><img src="media/villa_borgo_1.jpg" alt="Rendering di Borgo degli Dei Villas dello Studio Architetto Natale De Luca"></div><div class="vsmall"><img src="media/villa_borgo_2.jpg" alt="Rendering di Borgo degli Dei Villas dello Studio Architetto Natale De Luca"><img src="media/villa_borgo_3.jpg" alt="Rendering di Borgo degli Dei Villas dello Studio Architetto Natale De Luca"></div><div class="body"><h3>Borgo degli Dei Villas</h3><p>Zambrone</p></div></article><article class="vcard rv"><div class="vbig"><img src="media/villa_ivonne_1.jpg" alt="Rendering di Villa Ivonne dello Studio Architetto Natale De Luca"></div><div class="vsmall"><img src="media/villa_ivonne_2.jpg" alt="Rendering di Villa Ivonne dello Studio Architetto Natale De Luca"><img src="media/villa_ivonne_3.jpg" alt="Rendering di Villa Ivonne dello Studio Architetto Natale De Luca"></div><div class="body"><h3>Villa Ivonne</h3><p>Zambrone</p></div></article><article class="vcard rv"><div class="vbig"><img src="media/villa_zeus_1.jpg" alt="Rendering di Villa Zeus dello Studio Architetto Natale De Luca"></div><div class="vsmall"><img src="media/villa_zeus_2.jpg" alt="Rendering di Villa Zeus dello Studio Architetto Natale De Luca"><img src="media/villa_zeus_3.jpg" alt="Rendering di Villa Zeus dello Studio Architetto Natale De Luca"></div><div class="body"><h3>Villa Zeus</h3><p>Drapia</p></div></article><article class="vcard rv"><div class="vbig"><img src="media/villa_ng_1.jpg" alt="Rendering di Villa NG dello Studio Architetto Natale De Luca"></div><div class="vsmall"><img src="media/villa_ng_2.jpg" alt="Rendering di Villa NG dello Studio Architetto Natale De Luca"><img src="media/villa_ng_3.jpg" alt="Rendering di Villa NG dello Studio Architetto Natale De Luca"></div><div class="body"><h3>Villa NG</h3><p>Parghelia</p></div></article><article class="vcard rv"><div class="vbig"><img src="media/villa_ercole_1.jpg" alt="Rendering di Villa Porto Ercole dello Studio Architetto Natale De Luca"></div><div class="vsmall"><img src="media/villa_ercole_2.jpg" alt="Rendering di Villa Porto Ercole dello Studio Architetto Natale De Luca"><img src="media/villa_ercole_3.jpg" alt="Rendering di Villa Porto Ercole dello Studio Architetto Natale De Luca"></div><div class="body"><h3>Villa Porto Ercole</h3><p>Ricadi</p></div></article><article class="vcard rv"><div class="vbig"><img src="media/villa_puente_1.jpg" alt="Rendering di Puente Romano dello Studio Architetto Natale De Luca"></div><div class="vsmall"><img src="media/villa_puente_2.jpg" alt="Rendering di Puente Romano dello Studio Architetto Natale De Luca"><img src="media/villa_puente_3.jpg" alt="Rendering di Puente Romano dello Studio Architetto Natale De Luca"></div><div class="body"><h3>Puente Romano</h3><p>Tropea</p></div></article><article class="vcard rv"><div class="vbig"><img src="media/villa_dolce_1.jpg" alt="Rendering di Borgo Dolce Vita dello Studio Architetto Natale De Luca"></div><div class="vsmall"><img src="media/villa_dolce_2.jpg" alt="Rendering di Borgo Dolce Vita dello Studio Architetto Natale De Luca"><img src="media/villa_dolce_3.jpg" alt="Rendering di Borgo Dolce Vita dello Studio Architetto Natale De Luca"></div><div class="body"><h3>Borgo Dolce Vita</h3><p>Costa degli Dei</p></div></article></div>
-    <p class="small" style="margin-top:36px">Rendering dello Studio Architetto Natale De Luca. Sono progetti distinti dello studio, mostrati come portfolio; non fanno parte del resort Project Aethel.</p>
-  </div>
-</section>
 <!-- CLOSING -->
 <section class="film closing" id="contact">
   <video data-src="media/sunset_sea.mp4" poster="media/sunset_sea.jpg" muted loop playsinline preload="none" aria-label="Riprese drone del tramonto sul Tirreno"></video>
